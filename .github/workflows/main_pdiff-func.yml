@@ -53,7 +53,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-function.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -61,8 +61,8 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip     
-        
+        run: unzip release.zip
+
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
         id: deploy-to-function
