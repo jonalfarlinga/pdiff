@@ -4,11 +4,12 @@ import difflib
 
 def extract_text_from_pdf(pdf_path):
     document = fitz.open(pdf_path)
-    pages_text = []
+    text = ""
     for page_num in range(document.page_count):
+        text += f"Page number: {page_num}\n"
         page = document.load_page(page_num)
-        pages_text.append(page.get_text("text"))
-    return pages_text
+        text += page.get_text("text")
+    return text
 
 
 def compare_texts(text1, text2):
@@ -20,39 +21,45 @@ def compare_texts(text1, text2):
     return list(diff)
 
 
+def leftpad(line):
+    spaces = 4
+    num = line
+    while spaces > 0:
+        if num // 10 == 0:
+            break
+        spaces -= 1
+        num //= 10
+    return " " * spaces + str(line)
+
+
 def summarize_changes(diff):
     summary = []
+    count = -2
     for line in diff:
-        if line.startswith('+'):
-            summary.append(line)
-        elif line.startswith('-'):
-            summary.append(line)
-        elif line.startswith('?'):
-            summary.append(line)
-    return summary
+        count += 1
+        if line[:1] in "-+?":
+            summary.append(
+                line[:1] + leftpad(count) + f":{line[1:]}"
+            )
+        else:
+            summary.append(
+                " " + leftpad(count) + f":{line[1:]}"
+            )
+    return summary[2:]
 
 
 def compare_pdfs(pdf1_path, pdf2_path):
     pdf1_text = extract_text_from_pdf(pdf1_path)
     pdf2_text = extract_text_from_pdf(pdf2_path)
-    # for line in compare_texts(pdf1_text[0], pdf2_text[0]):
-    # print(line)
-    full_summary = []
-    for page_num in range(len(pdf1_text)):
-        diff = compare_texts(pdf1_text[page_num], pdf2_text[page_num])
-        page_summary = summarize_changes(diff)
-        # print(page_summary)
-        full_summary.append(f"Page {page_num + 1} changes:")
-        full_summary.extend(page_summary)
-        full_summary.append("")  # Add a blank line for readability
 
+    diff = compare_texts(pdf1_text, pdf2_text)
+    full_summary = summarize_changes(diff)
     return full_summary
 
 
 if __name__ == "__main__":
-    # Example usage
-    pdf1_path = 'doc2.pdf'
-    pdf2_path = 'doc1.pdf'
+    pdf1_path = 'doc1.pdf'
+    pdf2_path = 'doc2.pdf'
     summary = compare_pdfs(pdf1_path, pdf2_path)
     for line in summary:
         print(line)
