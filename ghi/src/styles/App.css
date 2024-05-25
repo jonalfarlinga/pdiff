@@ -1,0 +1,121 @@
+
+/* Primary Format */
+.App {
+  text-align: center;
+  background-color: rgb(214, 193, 165);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #8d795e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.fade-border {
+    background: linear-gradient(#8d795e, rgb(214,193,165));
+    padding:10px
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+footer {
+    padding-top: 4em;
+    font-size: small;
+}
+
+#calendar-box {
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+#App-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1em
+}
+
+.hero {
+    border-radius: 3rem;
+}
+
+main {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #8d795e;
+    border-color: black;
+}
+
+.btn-primary:hover {
+    background-color: #8d795e;
+    border-color: #8d795e;
+}
+
+.btn-primary:active {
+    background-color: #8d795e;
+    border-color: white;
+}
+
+/* TXST format */
+
+.txst {
+    background-color: #AC9155;
+}
+
+.txst-header {
+    background-color: #501214;
+}
+
+.fade-border-txst {
+    background: linear-gradient(#501214, #AC9155);
+}
+
+.btn-txst {
+    background-color: #266725;
+    border-color: #419E69;
+}
+
+.btn-txst:hover {
+    background-color: #266725;
+    border-color: #266725;
+}
+
+/* SUU format */
+
+.suu {
+    background-color: #711719;
+}
+
+.suu-header {
+    background-color: #E91D2D;
+}
+
+.fade-border-suu {
+    background: linear-gradient(#E91D2D, #711719);
+}
+
+.btn-suu {
+    background-color: black;
+    border-color: #787979;
+}
+
+.btn-suu:hover {
+    background-color: black;
+    border-color: black;
+}
+
+.white-txt {
+    color: white;
+}

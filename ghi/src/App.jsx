@@ -1,37 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Differ from './differ/differ'
+import './styles/App.css';
+import { useState } from 'react';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [uniStyle, setUniStyle] = useState(null)
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      className=
+        { "App " + (uniStyle ? uniStyle : null) }
+    >
+      <header
+        className=
+          { "App-header " + (uniStyle ? uniStyle + "-header" : null) }
+      >
+        <img className="mt-3 hero" src="./calends512.png" alt="logo" />
+      </header>
+      <div
+        className=
+          { "fade-border " +
+            (uniStyle ? "fade-border-" + uniStyle : null) }
+      >
+        <h1>Calends Online</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <main>
+        <button
+          type="button"
+          className=
+            { "btn btn-primary " + (uniStyle ? "btn-" + uniStyle : null) }
+          data-bs-toggle="modal"
+          data-bs-target="#welcomeModal">
+            About
         </button>
-        <Differ />
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+        <div id="App-box" className="container mx-auto col m-3">
+
+        </div>
+
+      </main>
+      <footer>
+        <a href="https://github.com/jonalfarlinga/pdiff">PDiF Github Project</a>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
