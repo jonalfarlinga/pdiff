@@ -1,6 +1,11 @@
 import fitz
 import difflib
 
+RESET = '\033[39;49m'
+RED = '\x1b[38;5;1m'
+GREEN = '\x1b[38;5;2m'
+BLUE = '\x1b[38;5;4m'
+
 
 def extract_text_from_pdf(pdf_path):
     document = fitz.open(pdf_path)
@@ -13,10 +18,10 @@ def extract_text_from_pdf(pdf_path):
 
 
 def compare_texts(text1, text2):
-    diff = difflib.unified_diff(
+    diff = difflib.ndiff(
         text1.splitlines(),
         text2.splitlines(),
-        lineterm=''
+        # lineterm=''
     )
     return list(diff)
 
@@ -34,18 +39,22 @@ def leftpad(line):
 
 def summarize_changes(diff):
     summary = []
-    count = -2
+    count = 0
     for line in diff:
         count += 1
-        if line[:1] in "-+?":
+        if line[:1] in "-":
             summary.append(
-                line[:1] + leftpad(count) + f":{line[1:]}"
+                RED + line[:1] + leftpad(count) + f":{line[1:]}" + RESET
+            )
+        elif line[:1] == "+":
+            summary.append(
+                GREEN + line[:1] + leftpad(count) + f":{line[1:]}" + RESET
             )
         else:
             summary.append(
-                " " + leftpad(count) + f":{line[1:]}"
+                BLUE + " " + leftpad(count) + f":{line[1:]}" + RESET
             )
-    return summary[2:]
+    return summary
 
 
 def compare_pdfs(pdf1_path, pdf2_path):
@@ -58,8 +67,8 @@ def compare_pdfs(pdf1_path, pdf2_path):
 
 
 if __name__ == "__main__":
-    pdf1_path = 'doc1.pdf'
-    pdf2_path = 'doc2.pdf'
+    pdf1_path = 'test 4350.pdf'
+    pdf2_path = 'test 5350.pdf'
     summary = compare_pdfs(pdf1_path, pdf2_path)
     for line in summary:
         print(line)
