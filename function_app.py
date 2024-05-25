@@ -1,29 +1,27 @@
+import json
 import azure.functions as func
 import logging
+from src.differ import compare_pdfs
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
-@app.route(route="about")
-def about(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+@app.route(route="diff-pdf")
+def diff_pdf(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Calculating diff')
 
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
+    pdf1_file = req.files.get('pdf1')
+    pdf2_file = req.files.get('pdf2')
 
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function"
-                                 " executed successfully.")
+    if pdf1_file and pdf2_file:
+        diff_summary = compare_pdfs(pdf1_file, pdf2_file)
+
+        return func.HttpResponse(
+            json.dumps({
+                "diff": diff_summary
+            }))
     else:
         return func.HttpResponse(
-            "This HTTP triggered function executed successfully. Pass a name "
-            "in the query string or in the request body for a personalized "
-            "response.",
-            status_code=200
+            "Failed to read input files",
+            status_code=400
         )
