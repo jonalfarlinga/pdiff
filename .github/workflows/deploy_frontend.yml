@@ -48,6 +48,11 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS_PDIFF }}
 
+        - name: Verify Subscription
+          run: |
+            az account show
+          continue-on-error: true
+
         - name: Upload to blob storage
           uses: azure/CLI@v1
           with:
