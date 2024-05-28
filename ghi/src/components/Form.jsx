@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { VITE_BACKEND_HOST } from './env'
 
 const initialData = {
     pdf1: undefined,
@@ -21,7 +22,7 @@ function Form({uniStyle, setDiff}) {
             return;
         }
 
-        const url = `${import.meta.env.VITE_BACKEND_HOST}/api/diff-pdf`
+        const url = `${VITE_BACKEND_HOST}/api/diff-pdf`
 
         const formData = new FormData()
         formData.append("pdf1", pdfData.pdf1)
