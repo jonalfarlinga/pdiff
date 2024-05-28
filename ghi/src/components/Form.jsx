@@ -4,13 +4,14 @@ const initialData = {
     pdf1: undefined,
     pdf2: undefined,
 }
-function Form({uniStyle, setUniStyle}) {
+function Form({uniStyle, setDiff}) {
     const [pdfData, setPdfData] = useState(initialData)
     const [err, setErr] = useState('')
-    const [diff, setDiff] = useState([])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setErr('')
+        setDiff([])
         if (!pdfData.pdf1 || !pdfData.pdf2) {
             setErr(
                 <div className='alert alert-warning alert-dismissible' role='alert'>
