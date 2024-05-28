@@ -68,6 +68,29 @@ main {
     border-color: white;
 }
 
+/* Differ */
+.nodiff {
+    color: blue;
+    margin: 0;
+}
+
+.reddiff {
+    color: red;
+    margin: 0;
+}
+
+.greendiff {
+    color: green;
+    margin: 0;
+}
+
+.diff-box {
+    width: 100%;
+    height: 90vh;
+    overflow: scroll;
+    text-align: left;
+}
+
 /* TXST format */
 
 .txst {

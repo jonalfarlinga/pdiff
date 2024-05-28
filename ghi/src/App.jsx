@@ -1,10 +1,12 @@
 import './styles/App.css';
 import { useState } from 'react';
 import Form from './components/Form'
+import DiffBox from './components/DiffBox';
 
 
 function App() {
   const [uniStyle, setUniStyle] = useState(null)
+  const [diff, setDiff] = useState([])
   return (
     <div
       className=
@@ -34,9 +36,9 @@ function App() {
         </button>
 
         <div id="App-box" className="container mx-auto col m-3">
-            <Form uniStyle={uniStyle} setUniStyle={setUniStyle} />
+            <Form uniStyle={uniStyle} setDiff={setDiff} />
+            <DiffBox uniStyle={uniStyle} diff={diff} />
         </div>
-
       </main>
       <footer>
         <a href="https://github.com/jonalfarlinga/pdiff">PDiF Github Project</a>
