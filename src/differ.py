@@ -1,10 +1,14 @@
 import fitz
 import difflib
 
-RESET = '\033[39;49m'
-RED = '\x1b[38;5;1m'
-GREEN = '\x1b[38;5;2m'
-BLUE = '\x1b[38;5;4m'
+# RESET = '\033[39;49m'
+# RED = '\x1b[38;5;1m'
+# GREEN = '\x1b[38;5;2m'
+# BLUE = '\x1b[38;5;4m'
+RESET = ''
+RED = ''
+GREEN = ''
+BLUE = ''
 
 
 def open_pdf(pdf_path=None, pdf_stream=None):

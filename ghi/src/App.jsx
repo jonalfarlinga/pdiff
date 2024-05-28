@@ -1,5 +1,6 @@
 import './styles/App.css';
 import { useState } from 'react';
+import Form from './components/Form'
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           { "fade-border " +
             (uniStyle ? "fade-border-" + uniStyle : null) }
       >
-        <h1>Calends Online</h1>
+        <h1>PDiF</h1>
       </div>
       <main>
         <button
@@ -33,7 +34,7 @@ function App() {
         </button>
 
         <div id="App-box" className="container mx-auto col m-3">
-
+            <Form uniStyle={uniStyle} setUniStyle={setUniStyle} />
         </div>
 
       </main>

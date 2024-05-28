@@ -2,6 +2,7 @@ import json
 import azure.functions as func
 import logging
 from src.differ import compare_pdfs
+import io
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
@@ -13,9 +14,17 @@ def diff_pdf(req: func.HttpRequest) -> func.HttpResponse:
     pdf1_file = req.files.get('pdf1')
     pdf2_file = req.files.get('pdf2')
 
-    if pdf1_file and pdf2_file:
-        diff_summary = compare_pdfs(pdf1_file, pdf2_file)
-
+    try:
+        pdf1_input = io.BytesIO(pdf1_file.read())
+        pdf2_input = io.BytesIO(pdf2_file.read())
+    except Exception as e:
+        print(str(e))
+        pdf1_input = None
+        pdf2_input = None
+    print(pdf1_input)
+    if pdf1_input and pdf2_input:
+        diff_summary = compare_pdfs(pdf1_input, pdf2_input)
+        logging.error(diff_summary)
         return func.HttpResponse(
             json.dumps({
                 "diff": diff_summary
