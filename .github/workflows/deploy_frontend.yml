@@ -1,0 +1,66 @@
+name: Static Web CI/CD
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout repo
+          uses: actions/checkout@v2
+
+        - name: Setup Node
+          uses: actions/setup-node@v1
+          with:
+            node-version: 16
+
+        - name: Build project
+          run: |
+            cd ghi
+            npm install
+            npm run build
+
+        - name: Upload production-ready build files
+          uses: actions/upload-artifact@v2
+          with:
+            name: production-files
+            path: ./ghi/dist
+
+    deploy:
+        name: Deploy
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+
+        - name: Download Artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: production-files
+            path: ghi/dist
+
+        - uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS_PDIFF }}
+
+        - name: Upload to blob storage
+          uses: azure/CLI@v1
+          with:
+            inlineScript: |
+                az storage blob upload-batch --acount-name pdiff --auth-mode key -d '$web' -s ./ghi/dist --overwrite
+
+        - name: Purge CDN endpoint
+          uses: azure/CLI@v1
+          with:
+            inlineScript: |
+                az cdn endpoint purge --content-paths "/*" --profile-name "pdiffprofile" --name "pdiffenpoint" --resource-group "proficientdr"
+
+        - name: logout
+          run: |
+            az logout
+          if: always()
