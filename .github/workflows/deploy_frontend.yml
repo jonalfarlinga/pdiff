@@ -57,7 +57,7 @@ jobs:
           uses: azure/CLI@v1
           with:
             inlineScript: |
-                az storage blob upload-batch --acount-name pdiffstore --auth-mode key -d '$web' -s ./ghi/dist --overwrite
+                az storage blob upload-batch --account-name pdiffstore --auth-mode key -d '$web' -s ./ghi/dist --overwrite
 
         - name: Purge CDN endpoint
           uses: azure/CLI@v1
