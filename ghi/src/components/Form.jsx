@@ -42,7 +42,7 @@ function Form({uniStyle, setDiff}) {
 
             if (response.ok) {
                 const data = await response.json();
-                
+
                 if (paginate) {
                     setDiff(pageMaker(data.diff))
                 } else {
@@ -71,7 +71,7 @@ function Form({uniStyle, setDiff}) {
         })
     }
 
-    const handleToggle = (e) => {
+    const handleToggle = () => {
         setPaginate(!paginate)
     }
 

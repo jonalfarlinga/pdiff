@@ -24,12 +24,9 @@ function DiffBox({ uniStyle, diff }) {
         } else {
             cn = "nodiff"
         }
-        return (
-            <div key={prefix+lnNum}>
-                <p className={cn}>{prefixImg(prefix)}<span className="ln-span">{lnNum}</span>{suffix}</p>
-            </div>
-        )
+        return <p key={prefix+lnNum} className={cn}>{prefixImg(prefix)}<span className="ln-span">{lnNum}</span>{suffix}</p>
     }
+    
     return (
         <div className="diff-box">
             {diff.map((line) => {

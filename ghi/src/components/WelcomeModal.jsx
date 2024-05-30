@@ -25,10 +25,10 @@ export default function WelcomeModal({uniStyle}) {
                 ></button>
               </div>
             <div className="modal-body">
-                <p>This website will create an empty syllabus for your next class.</p>
-                <p>On the form, select your institution, and fill in the relevant info for your semester and className session. Then Click the Get Calendar button to generate a table on the page. You can highlight and cut/paste the table to your favorite text editor!</p>
-                <p>I plan to implement .docx output soon, but if you want it now, you can get the terminal version of Calends <a href="https://github.com/jonalfarlinga/calends">here.</a></p>
-                <p>To report bugs or request new institutions or features, start an issue on <a href="https://github.com/jonalfarlinga/calends-online/issues">Github</a> or contact me on <a href="mailto:denny.bucklin@gmail.com">Gmail.</a></p>
+                <p>This website will take two versions of a pdf and return a summary of the textual changes from the first to the second.</p>
+                <p>On the form, select the pre version of the pdf using the first input box. Then select the post version of the document in the second box. Press the Get Differences button and the changes will fill in on the blackboard. If you check Paginate Results, the output will show one page, with navigation buttons.</p>
+                <p>P.S. There is no reason you can't upload two totally different pdfs, but you'll get more use out of the app if they are two versions of the same document.</p>
+                <p>To report bugs or request new features, start an issue on <a href="https://github.com/jonalfarlinga/pdiff">Github</a> or contact me on <a href="mailto:denny.bucklin@gmail.com">Gmail.</a></p>
                 <p>Enjoy!</p>
             </div>
               <div className="modal-footer">
