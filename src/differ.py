@@ -83,6 +83,11 @@ def compare_pdfs(pdf1_input, pdf2_input):
 if __name__ == "__main__":
     pdf1_path = 'doc1.pdf'
     pdf2_path = 'doc2.pdf'
+
+    RESET = '\033[39;49m'
+    RED = '\x1b[38;5;1m'
+    GREEN = '\x1b[38;5;2m'
+    BLUE = '\x1b[38;5;4m'
     summary = compare_pdfs(pdf1_path, pdf2_path)
     for line in summary:
         print(line)

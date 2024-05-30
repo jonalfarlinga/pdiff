@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { VITE_BACKEND_HOST } from './env'
+import pageMaker from './pageMaker'
 
 const initialData = {
     pdf1: undefined,
@@ -8,6 +9,7 @@ const initialData = {
 function Form({uniStyle, setDiff}) {
     const [pdfData, setPdfData] = useState(initialData)
     const [err, setErr] = useState('')
+    const [paginate, setPaginate] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -40,7 +42,12 @@ function Form({uniStyle, setDiff}) {
 
             if (response.ok) {
                 const data = await response.json();
-                setDiff(data.diff)
+                
+                if (paginate) {
+                    setDiff(pageMaker(data.diff))
+                } else {
+                    setDiff(data.diff)
+                }
             } else {
                 setErr(
                     <div className='alert alert-danger alert-dismissible' role='alert'>
@@ -64,6 +71,10 @@ function Form({uniStyle, setDiff}) {
         })
     }
 
+    const handleToggle = (e) => {
+        setPaginate(!paginate)
+    }
+
     return (
         <form className='mt-3 mb-3 col' onSubmit={handleSubmit}>
             <div className='liveAlertPlaceholder'>
@@ -75,6 +86,7 @@ function Form({uniStyle, setDiff}) {
               required
               name='pdf1'
               id='pdf1'
+              accept='pdf'
               className='form-control'
             />
             <label htmlFor='pdf1'>Original PDF</label>
@@ -84,9 +96,19 @@ function Form({uniStyle, setDiff}) {
               required
               name='pdf2'
               id='pdf2'
+              accept='pdf'
               className='form-control'
             />
             <label htmlFor='pdf2'>Edited PDF</label>
+            <br></br>
+            <input
+              onChange={handleToggle}
+              type='checkbox'
+              name='paginate'
+              id='paginate'
+              value={paginate}
+              className='' />
+            <label htmlFor='paginate'>Paginate Results?</label>
             <button className={
                 'form-control btn btn-primary ' + (uniStyle)
                 }

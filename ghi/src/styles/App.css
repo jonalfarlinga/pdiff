@@ -70,25 +70,39 @@ main {
 
 /* Differ */
 .nodiff {
-    color: blue;
+    color: dodgerblue;
     margin: 0;
 }
 
 .reddiff {
-    color: red;
+    color: orangered;
     margin: 0;
 }
 
 .greendiff {
-    color: green;
+    color: #50A010;
     margin: 0;
 }
 
 .diff-box {
+    background-color: #333336;
     width: 100%;
     height: 90vh;
     overflow: scroll;
     text-align: left;
+    padding: 0.25rem;
+}
+
+.ln-span {
+    display: inline-block;
+    width: 1.75rem;
+    text-align: right;
+    margin-right:.25em;
+}
+
+.ln-pre {
+    display: inline-block;
+    width: 1em;
 }
 
 /* TXST format */

@@ -16,7 +16,7 @@ function App() {
         className=
           { "App-header " + (uniStyle ? uniStyle + "-header" : null) }
       >
-        <img className="mt-3 hero" src="./calends512.png" alt="logo" />
+        {/* <img className="mt-3 hero" src="./" alt="logo" /> */}
       </header>
       <div
         className=
