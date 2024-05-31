@@ -10,6 +10,8 @@ Have you ever tried had to grade a second draft of a 15-page final? Only to find
 
 ## Quickstart
 
+![pdiff_screenshot](https://github.com/jonalfarlinga/pdiff/assets/138133515/93e94bc5-f145-4b6a-a852-e4deb8497760)
+
 Navigate to [PDiF](https://pdiff.proficientdr.com)
 
 1. Choose two versions of the same PDF document using the file selectors.
@@ -27,6 +29,8 @@ By default, all lines of the document are presented in one page. If `Paginate Re
 `Paginate Results?` will also operate as a toggle, changing the output without fetching new data.
 
 Unchanged lines will be rendered in blue text, additions in green and removals in red.
+
+![pdiff](https://github.com/jonalfarlinga/pdiff/assets/138133515/4827838c-8504-442f-8495-81ec788f109a)
 
 ## API Documentation
 
