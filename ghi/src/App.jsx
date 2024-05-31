@@ -2,9 +2,12 @@ import './styles/App.css';
 import { useState } from 'react';
 import Form from './components/Form'
 import DiffBox from './components/DiffBox';
+import WelcomeModal from './components/WelcomeModal';
+import PaginateDiff from './components/PaginateDiff';
 
 
 function App() {
+  const [paginate, setPaginate] = useState(false)
   const [uniStyle, setUniStyle] = useState(null)
   const [diff, setDiff] = useState([])
   return (
@@ -16,7 +19,7 @@ function App() {
         className=
           { "App-header " + (uniStyle ? uniStyle + "-header" : null) }
       >
-        <img className="mt-3 hero" src="./calends512.png" alt="logo" />
+        {/* <img className="mt-3 hero" src="./" alt="logo" /> */}
       </header>
       <div
         className=
@@ -34,10 +37,11 @@ function App() {
           data-bs-target="#welcomeModal">
             About
         </button>
-
+        <WelcomeModal />
         <div id="App-box" className="container mx-auto col m-3">
-            <Form uniStyle={uniStyle} setDiff={setDiff} />
-            <DiffBox uniStyle={uniStyle} diff={diff} />
+            <Form uniStyle={uniStyle} setDiff={setDiff} setPaginate={setPaginate} paginate={paginate} />
+            {paginate ? <PaginateDiff uniStyle={uniStyle} diff={diff} /> :
+                        <DiffBox uniStyle={uniStyle} diff={diff} />}
         </div>
       </main>
       <footer>

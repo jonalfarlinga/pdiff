@@ -5,7 +5,7 @@ const initialData = {
     pdf1: undefined,
     pdf2: undefined,
 }
-function Form({uniStyle, setDiff}) {
+function Form({uniStyle, setDiff, setPaginate, paginate}) {
     const [pdfData, setPdfData] = useState(initialData)
     const [err, setErr] = useState('')
 
@@ -40,6 +40,7 @@ function Form({uniStyle, setDiff}) {
 
             if (response.ok) {
                 const data = await response.json();
+
                 setDiff(data.diff)
             } else {
                 setErr(
@@ -64,6 +65,10 @@ function Form({uniStyle, setDiff}) {
         })
     }
 
+    const handleToggle = () => {
+        setPaginate(!paginate)
+    }
+
     return (
         <form className='mt-3 mb-3 col' onSubmit={handleSubmit}>
             <div className='liveAlertPlaceholder'>
@@ -75,6 +80,7 @@ function Form({uniStyle, setDiff}) {
               required
               name='pdf1'
               id='pdf1'
+              accept='pdf'
               className='form-control'
             />
             <label htmlFor='pdf1'>Original PDF</label>
@@ -84,9 +90,19 @@ function Form({uniStyle, setDiff}) {
               required
               name='pdf2'
               id='pdf2'
+              accept='pdf'
               className='form-control'
             />
             <label htmlFor='pdf2'>Edited PDF</label>
+            <br></br>
+            <input
+              onChange={handleToggle}
+              type='checkbox'
+              name='paginate'
+              id='paginate'
+              value={paginate}
+              className='' />
+            <label htmlFor='paginate'>Paginate Results?</label>
             <button className={
                 'form-control btn btn-primary ' + (uniStyle)
                 }
