@@ -93,6 +93,15 @@ main {
     padding: 0.25rem;
 }
 
+.diff-box-page {
+    font-size: small;
+    background-color: #333336;
+    width: 100%;
+    min-height: 90vh;
+    text-align: left;
+    padding: 0.25rem;
+}
+
 .ln-span {
     display: inline-block;
     width: 1.75rem;

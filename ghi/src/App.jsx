@@ -3,9 +3,11 @@ import { useState } from 'react';
 import Form from './components/Form'
 import DiffBox from './components/DiffBox';
 import WelcomeModal from './components/WelcomeModal';
+import PaginateDiff from './components/PaginateDiff';
 
 
 function App() {
+  const [paginate, setPaginate] = useState(false)
   const [uniStyle, setUniStyle] = useState(null)
   const [diff, setDiff] = useState([])
   return (
@@ -37,8 +39,9 @@ function App() {
         </button>
         <WelcomeModal />
         <div id="App-box" className="container mx-auto col m-3">
-            <Form uniStyle={uniStyle} setDiff={setDiff} />
-            <DiffBox uniStyle={uniStyle} diff={diff} />
+            <Form uniStyle={uniStyle} setDiff={setDiff} setPaginate={setPaginate} paginate={paginate} />
+            {paginate ? <PaginateDiff uniStyle={uniStyle} diff={diff} /> :
+                        <DiffBox uniStyle={uniStyle} diff={diff} />}
         </div>
       </main>
       <footer>

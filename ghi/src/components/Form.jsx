@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import { VITE_BACKEND_HOST } from './env'
-import pageMaker from './pageMaker'
 
 const initialData = {
     pdf1: undefined,
     pdf2: undefined,
 }
-function Form({uniStyle, setDiff}) {
+function Form({uniStyle, setDiff, setPaginate, paginate}) {
     const [pdfData, setPdfData] = useState(initialData)
     const [err, setErr] = useState('')
-    const [paginate, setPaginate] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -43,11 +41,7 @@ function Form({uniStyle, setDiff}) {
             if (response.ok) {
                 const data = await response.json();
 
-                if (paginate) {
-                    setDiff(pageMaker(data.diff))
-                } else {
-                    setDiff(data.diff)
-                }
+                setDiff(data.diff)
             } else {
                 setErr(
                     <div className='alert alert-danger alert-dismissible' role='alert'>
